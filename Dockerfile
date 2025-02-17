@@ -46,14 +46,13 @@ ENV POETRY_VENV=/app/.venv
 
 RUN python3 -m venv $POETRY_VENV \
     && $POETRY_VENV/bin/pip install -U pip setuptools \
-    && $POETRY_VENV/bin/pip install poetry==1.8.3
+    && $POETRY_VENV/bin/pip install poetry==2.1.1
 
 ENV PATH="${PATH}:${POETRY_VENV}/bin"
 
 WORKDIR /app
 
 COPY . /app
-COPY --from=ffmpeg /FFmpeg-6.1.2 /FFmpeg-6.1.2
 COPY --from=ffmpeg /root/bin/ffmpeg /usr/local/bin/ffmpeg
 COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui.css swagger-ui-assets/swagger-ui.css
 COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui-bundle.js swagger-ui-assets/swagger-ui-bundle.js
